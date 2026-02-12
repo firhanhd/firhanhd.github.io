@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Surat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aldrich&family=Pixelify+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Surat</title>
+  </head>
+  <body>
+    
+    <!-- Envelope Screen -->
+    <div id="envelope-container">
+      <img src="envelope.png" alt="Envelope" id="envelope" />
+      <p>♡ Surat Untuk Kamu ♡</p>
+    </div>
+
+    <!-- Letter Screen -->
+    <div id="letter-container">
+      <div class="letter-window">
+        <h1 id="letter-title">MAU KETEMUAN ?</h1>
+
+        <img src="cat_heart.gif" class="cat" id="letter-cat" />
+
+        <div class="buttons" id="letter-buttons">
+          <img src="mau.png" class="btn yes-btn" alt="Yes" />
+
+          <div class="no-wrapper">
+            <img src="ga.png" class="btn no-btn" alt="No" />
+          </div>
+        </div>
+
+        <p id="final-text" class="final-text" style="display: none">
+          <strong>Ketemuan :</strong> Warkop Ternyaman Ba'da Ashar!
+        </p>
+      </div>
+    </div>
+    <script src="script.js">// Elements
+const envelope = document.getElementById("envelope-container");
+const letter = document.getElementById("letter-container");
+const noBtn = document.querySelector(".no-btn");
+const yesBtn = document.querySelector(".btn[alt='Yes']");
+
+const title = document.getElementById("letter-title");
+const catImg = document.getElementById("letter-cat");
+const buttons = document.getElementById("letter-buttons");
+const finalText = document.getElementById("final-text");
+
+// Click Envelope
+
+envelope.addEventListener("click", () => {
+    envelope.style.display = "none";
+    letter.style.display = "flex";
+
+    setTimeout( () => {
+        document.querySelector(".letter-window").classList.add("open");
+    },50);
+});
+
+// Logic to move the NO btn
+
+noBtn.addEventListener("mouseover", () => {
+    const min = 200;
+    const max = 200;
+
+    const distance = Math.random() * (max - min) + min;
+    const angle = Math.random() * Math.PI * 2;
+
+    const moveX = Math.cos(angle) * distance;
+    const moveY = Math.sin(angle) * distance;
+
+    noBtn.style.transition = "transform 0.3s ease";
+    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+});
+
+// Logic to make YES btn to grow
+
+// let yesScale = 1;
+
+// yesBtn.style.position = "relative"
+// yesBtn.style.transformOrigin = "center center";
+// yesBtn.style.transition = "transform 0.3s ease";
+
+// noBtn.addEventListener("click", () => {
+//     yesScale += 2;
+
+//     if (yesBtn.style.position !== "fixed") {
+//         yesBtn.style.position = "fixed";
+//         yesBtn.style.top = "50%";
+//         yesBtn.style.left = "50%";
+//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
+//     }else{
+//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
+//     }
+// });
+
+// YES is clicked
+
+yesBtn.addEventListener("click", () => {
+    title.textContent = "ALhamdulillah...";
+
+    catImg.src = "cat_dance.gif";
+
+    document.querySelector(".letter-window").classList.add("final");
+
+    buttons.style.display = "none";
+
+    finalText.style.display = "block";
+});
+</script>
+  </body>
+</html>
